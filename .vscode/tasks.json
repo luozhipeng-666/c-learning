@@ -1,0 +1,34 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build-debug",
+      "type": "shell",
+      "command": "gcc",
+      "args": [
+        "-g", // 增加这个参数，才能进行 debug 调试，但是会输出 dSYM 文件夹调试信息，这个参数的作用是在编译后的可执行文件中嵌入调试信息。这些信息包括变量名、函数名、行号等，它们可以被GDB（GNU调试器）等调试工具用来帮助你逐步执行代码、检查变量的值，以及定位错误。
+        "-Wall", //  是 "Warnings All" 的缩写，它会开启GCC推荐的大部分警告。这些警告会提醒你代码中可能存在的潜在问题，例如未使用的变量、未初始化的变量、可能导致逻辑错误的表达式等。这是一个非常好的习惯，因为它能帮助你在早期发现并修复潜在的bug。
+        "-Wextra", // Wextra 是 "Warnings Extra" 的缩写，它会开启一些Wall没有覆盖到的额外警告。这些警告通常更为严格，例如提醒你关于某些数据类型转换、函数返回值的处理等问题。将Wall和Wextra结合使用，可以最大限度地让编译器帮助你检查代码质量。
+        "-std=c99",
+        "-o", // 指定输出文件名
+        "${fileDirname}/${fileBasenameNoExtension}.out",
+        "${file}"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [
+        "$gcc"
+      ]
+    }
+  ]
+} 
